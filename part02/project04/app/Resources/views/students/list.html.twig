@@ -6,12 +6,17 @@
 
     {{ dump() }}
 
+    <h1>List of students</h1>
+
     <ul>
         {% for student in students %}
             <li>
                 id = {{ student.id }}
                 <br>
-                name = {{ student.name }}
+                name =
+                <a href="{{ path('students_show', {id:student.id}) }}">
+                    {{ student.name }}
+                </a>
             </li>
         {% endfor %}
     </ul>
