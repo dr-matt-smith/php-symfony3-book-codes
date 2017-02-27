@@ -1,0 +1,17 @@
+{% extends '_base.html.twig' %}
+
+{% block body %}
+
+    {{ dump() }}
+
+    <ul>
+        {% for student in students %}
+            <li>
+                id = {{ student.id }}
+                <br>
+                name = {{ student.name }}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
