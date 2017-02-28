@@ -127,6 +127,16 @@ class StudentController extends Controller
         // extract 'name' parameter from POST data
         $name = $request->request->get('name');
 
+        if(empty($name)){
+            $this->addFlash(
+                'error',
+                'student name cannot be an empty string'
+            );
+
+            // forward this to the createAction() method
+            return $this->newFormAction($request);
+        }
+
         // forward this to the createAction() method
         return $this->createAction($name);
     }
