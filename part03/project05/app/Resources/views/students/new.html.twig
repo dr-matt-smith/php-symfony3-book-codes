@@ -1,0 +1,19 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}show one student{% endblock %}
+
+{% block body %}
+
+    <h1>Create new student</h1>
+
+
+    <form action="/students/processNewForm" method="POST">
+        Name:
+        <input type="text" name="name">
+
+        <p>
+        <input type="submit" value="Create new student">
+    </form>
+
+
+{% endblock %}
