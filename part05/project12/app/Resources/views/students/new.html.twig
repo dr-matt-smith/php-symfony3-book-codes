@@ -1,0 +1,44 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}new student form{% endblock %}
+
+
+{% block stylesheets %}
+<style>
+    label {
+        display: inline-block;
+        float: left;
+        width: 10rem;
+        padding-right: 0.5rem;
+        font-weight:bold;
+        color: blue;
+        text-align: right;
+    }
+
+    .form-field {
+        padding-bottom: 1rem;
+    }
+</style>
+{% endblock %}
+
+
+{% block body %}
+    <h1>Create new student</h1>
+    {{ form_start(form) }}
+
+    <div class="form-field">
+        <div class="errors">
+            {{ form_errors(form.name) }}
+        </div>
+
+        {{ form_label(form.name) }}
+
+        {{ form_widget(form.name) }}
+    </div>
+
+    <div>
+        {{ form_row(form.save) }}
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>MGW - {% block pageTitle %}{% endblock %}</title>
+
+        <style>
+            @import '/css/flash.css';
+            {% block stylesheets %}
+            {% endblock %}
+        </style>
+    </head>
+    <body>
+
+    <ul>
+        <li>
+            <a href="{{ path('students_list') }}">list of students</a>
+        </li>
+    </ul>
+
+    <hr>
+        {% block body %}
+        {% endblock %}
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
