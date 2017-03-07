@@ -1,0 +1,53 @@
+{% extends '_base.html.twig' %}
+
+{% block body %}
+
+{% set basket_products = app.session.get('basket') %}
+
+{% if basket_products is null %}
+    {% set basket_products = [] %}
+{% endif %}
+
+    <h1>Products in BASKET list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in basket_products %}
+            <tr>
+                <td><a href="{{ path('product_show', { 'id': product.id }) }}">{{ product.id }}</a></td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('product_show', { 'id': product.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('product_edit', { 'id': product.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {#
+
+    <ul>
+        <li>
+            <a href="{{ path('basket_clear') }}">empty your basket</a>
+        </li>
+    </ul>
+
+    #}
+
+{% endblock %}

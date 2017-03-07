@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 
+use Symfony\Component\HttpFoundation\Session\Session;
+
 class DefaultController extends Controller
 {
     /**
@@ -26,5 +28,13 @@ class DefaultController extends Controller
         return $this->render($templateName . '.html.twig', $argsArray);
     }
 
+    /**
+     * @Route("/clear_session", name="clear_session")
+     */
+    public function clearSessionAction(Request $request)
+    {
+        $session = new Session();
+        $session->clear();
 
+        return $this->redirectToRoute('homepage');    }
 }

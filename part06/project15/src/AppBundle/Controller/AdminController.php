@@ -10,21 +10,24 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\HttpFoundation\Response;
 
-
-class DefaultController extends Controller
+/**
+ * Class AdminController
+ * @package AppBundle\Controller
+ *
+ * @Route("/admin")
+ */
+class AdminController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="admin_index")
      */
     public function indexAction(Request $request)
     {
         $argsArray =  [
-            'name' => 'matt'
         ];
 
-        $templateName = 'index';
+        $templateName = '/admin/index';
         return $this->render($templateName . '.html.twig', $argsArray);
     }
-
 
 }

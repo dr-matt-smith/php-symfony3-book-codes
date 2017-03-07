@@ -1,0 +1,32 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}home page{% endblock %}
+
+{% block body %}
+
+    <h1>welcome to home page</h1>
+
+    <hr>
+    <ul>
+
+        <li>
+            <a href="{{ path('homepage') }}">back to home page</a>
+        </li>
+
+        <li>
+            <a hrer="http://symfony.com/doc/current/page_creation.html">getting started (on the Symfony website)</a>
+        </li>
+    </ul>
+
+
+
+    <p>
+        I am the home page ...
+
+    </p>
+
+    <hr>
+
+    {{ dump() }}
+{% endblock %}
+
