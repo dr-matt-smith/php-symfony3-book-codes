@@ -1,8 +1,34 @@
 {% extends '_base.html.twig' %}
 
+
 {% block pageTitle %}home page{% endblock %}
 
 {% block body %}
+    {% set default_colours = 'no' %}
+
+    {% set colours = app.session.get('colours') %}
+
+    {% if colours is null %}
+        {% set default_colours = 'yes' %}
+        {% set colours = {
+        'foreground': 'blue',
+        'background': 'pink'
+        }
+        %}
+    {% endif %}
+
+
+    <p>
+        using default colours = {{ default_colours }}
+    </p>
+    <ul>
+        {% for property, colour in colours %}
+            <li>
+            {{ property }} = {{ colour }}
+            </li>
+        {% endfor %}
+    </ul>
+
 
     <h1>welcome to home page</h1>
 

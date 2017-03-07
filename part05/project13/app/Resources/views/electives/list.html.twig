@@ -1,0 +1,33 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}list of electives{% endblock %}
+
+{% block body %}
+
+    {% set electives = app.session.get('electives') %}
+
+    {{ dump(app.session.get('electives')) }}
+
+    <h1>List of electives</h1>
+
+    {% if electives is null %}
+        <p>
+            you have no electives in your basket
+        </p>
+    {% else %}
+        <ul>
+            {% for elective in electives %}
+                <li>
+                    id = {{ elective.id }}
+                    <br>
+                    module code = {{ elective.moduleCode }}
+                    <br>
+                    module title = {{ elective.moduleTitle }}
+                    <br>
+                    credits = {{ elective.credits }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}

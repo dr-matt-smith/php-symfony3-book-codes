@@ -1,0 +1,44 @@
+
+{% set colours = app.session.get('colours') %}
+
+{# default = blue #}
+{% if colours is null %}
+    {% set colours = {
+    'foreground': 'blue',
+    'background': 'pink'
+    }
+    %}
+{% endif %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>MGW - {% block pageTitle %}{% endblock %}</title>
+
+    <style>
+        @import '/css/flash.css';
+        {% block stylesheets %}
+        {% endblock %}
+
+        body {
+            color: {{ colours['foreground'] }};
+            background-color: {{ colours['background'] }};
+        }
+    </style>
+</head>
+<body>
+
+    <ul>
+        <li>
+            <a href="{{ path('students_list') }}">list of students</a>
+        </li>
+    </ul>
+
+    <hr>
+        {% block body %}
+        {% endblock %}
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
