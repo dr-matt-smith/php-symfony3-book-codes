@@ -1,0 +1,52 @@
+
+{% set colours = app.session.get('colours') %}
+
+{# default = blue #}
+{% if colours is null %}
+    {% set colours = {
+        'foreground': 'black',
+        'background': 'white'
+    }
+    %}
+{% endif %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>MGW - {% block pageTitle %}{% endblock %}</title>
+
+        <style>
+            @import '/css/header.css';
+            @import '/css/flash.css';
+            {% block stylesheets %}
+            {% endblock %}
+
+            body {
+                color: {{ colours['foreground'] }};
+                background-color: {{ colours['background'] }};
+            }
+        </style>
+    </head>
+    <body>
+
+    {% set user = app.session.get('user') %}
+
+    {% if user is null %}
+        <p>
+            error - you are not logged in: <a href="{{ path('login') }}">login</a>
+        </p>
+    {% else %}
+        <header>
+            You are logged in as: {{ user.username }}
+            <br>
+            <a href="{{ path('logout') }}">logout</a>
+        </header>
+    {% endif %}
+
+        {% block body %}
+        {% endblock %}
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

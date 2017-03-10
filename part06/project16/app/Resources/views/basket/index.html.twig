@@ -1,0 +1,41 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}list of electives{% endblock %}
+
+{% block body %}
+
+    {% set basket_electives = app.session.get('basket') %}
+
+    {{ dump(app.session.get('basket')) }}
+
+    <h1>List of electives in basket</h1>
+
+    {% if basket_electives is null %}
+        <p>
+            you have no electives in your basket
+        </p>
+    {% else %}
+        <ul>
+            {% for elective in basket_electives %}
+                <li>
+                    <hr>
+                    id = {{ elective.id }}
+                    <br>
+                    module code = {{ elective.moduleCode }}
+                    <br>
+                    module title = {{ elective.moduleTitle }}
+                    <br>
+                    credits = {{ elective.credits }}
+                    <br>
+                    <a href="{{ path('electives_basket_delete', { 'id': elective.id }) }}">(remove)</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    <p>
+        <a href="{{ path('electives_basket_clear') }}">CLEAR all items in basket</a>
+    </p>
+
+{% endblock %}

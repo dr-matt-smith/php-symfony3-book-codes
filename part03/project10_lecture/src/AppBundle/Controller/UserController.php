@@ -19,28 +19,6 @@ class UserController extends Controller
 {
 
 
-    /**
-     * Creates a new user entity.
-     *
-     * @Route("/login", name="user_login")
-     * @Method({"GET", "POST"})
-     */
-    public function loginAction(Request $request)
-    {
-        $user = new User();
-        $form = $this->createForm('AppBundle\Form\UserType', $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-        }
-
-        return $this->render('user/login.html.twig', array(
-            'user' => $user,
-            'form' => $form->createView(),
-        ));
-    }
-
-
 
     /**
      * Lists all user entities.
@@ -160,6 +138,28 @@ class UserController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+
+    /**
+     * Creates a new user entity.
+     *
+     * @Route("/login", name="user_login")
+     * @Method({"GET", "POST"})
+     */
+    public function loginAction(Request $request)
+    {
+        $user = new User();
+        $form = $this->createForm('AppBundle\Form\UserType', $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+        }
+
+        return $this->render('user/login.html.twig', array(
+            'user' => $user,
+            'form' => $form->createView(),
+        ));
     }
 
 

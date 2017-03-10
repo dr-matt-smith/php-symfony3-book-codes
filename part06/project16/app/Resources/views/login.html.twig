@@ -1,0 +1,21 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %}login{% endblock %}
+
+{% block body %}
+    <h1>Login</h1>
+
+    {% if app.session.flashBag.has('error') %}
+        <div class="flash-error">
+            {% for msg in app.session.flashBag.get('error') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Login" />
+    {{ form_end(form) }}
+
+{% endblock %}
