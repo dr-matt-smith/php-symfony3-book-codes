@@ -24,5 +24,3 @@ security:
         main:
             anonymous: ~
             http_basic: ~
-
-
