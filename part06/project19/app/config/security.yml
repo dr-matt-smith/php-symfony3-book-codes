@@ -9,13 +9,13 @@ security:
             memory:
                 users:
                     user:
-                        password: user
+                        password: $2y$12$pUaaC6cwub1NkwNvSm/FnuR3rli8YgjIg1Di68hqX4J1TnGpLc2AC
                         roles: 'ROLE_USER'
                     admin:
-                        password: admin
+                        password: $2y$12$ROCN/MhD6U0Rsr0xsrHT/.RETqtgm8nQmdbOsC2o4w4RyHrUhXcvS
                         roles: 'ROLE_ADMIN'
                     matt:
-                        password: smith
+                        password: $2y$12$4UWrrc1pkskcCMDpcj4XzeLVsn5Tlk4zkQJAyrSaoDnOnY1wgHUH2
                         roles: 'ROLE_ADMIN'
 
     firewalls:
@@ -32,5 +32,3 @@ security:
             logout:
                 path:   /logout
                 target: /
-
-
