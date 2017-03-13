@@ -1,0 +1,47 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/security.html
+security:
+
+#    encoders:
+#        Symfony\Component\Security\Core\User\User: plaintext
+    encoders:
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
+            cost: 12
+    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        in_memory:
+            memory:
+                users:
+                    user:
+                        password: $2y$12$LsAy0FHbPE9Xvo..xOF1YuZFa/jHNaLitYgMXBZiMiIxSOR.WF3R2
+                        roles: 'ROLE_USER'
+                    admin:
+                        password: $2y$12$DoLXl7SuESCQrZ4.se3gEOt.hA7GShvU1zUw9gpah7Pvl7B0f.Ooy
+                        roles: 'ROLE_ADMIN'
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        default:
+            anonymous: ~
+            http_basic: ~
+
+        main:
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+
+        secured_area:
+            pattern: ^/
+            anonymous: ~
+
+            logout:
+                path:   /logout
+                target: /
