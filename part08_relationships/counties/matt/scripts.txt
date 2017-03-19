@@ -1,0 +1,109 @@
+
+User
+php bin/console generate:doctrine:entity --no-interaction --entity=AppBundle:User --fields="username:string(255) password:string(255) county:County"
+
+    /**
+     * @ORM\ManyToOne(targetEntity="County")
+     * @ORM\JoinColumn(name="county_id", referencedColumnName="id")
+     */
+    private $county;
+
+
+
+
+County
+php bin/console generate:doctrine:entity --no-interaction --entity=AppBundle:County --fields="name:string(255)"
+
+ php bin/console  doctrine:database:create
+
+ php bin/console doctrine:schema:update --force
+
+==
+craete CRUD
+
+php bin/console generate:doctrine:crud --entity=AppBundle:County --format=annotation --with-write --no-interaction
+
+ =====
+Setup Fixturess
+
+ 1 - download the bundle (NOTE - do this BEFORE changing from MySQL to SQLite - since it expects SQLite in config/params)
+ composer require --dev doctrine/doctrine-fixtures-bundle
+
+ 2 - enable the bundle in  app/AppKernel.php
+
+        public function registerBundles()
+            {
+                // ...
+                if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+
+    add line:
+             $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
+
+3 - write class to create fixtures
+
+    e.g. // src/AppBundle/DataFixtures/ORM/LoadUserData.php
+
+4 - load the fixtures
+
+            php bin/console doctrine:fixtures:load
+
+
+=====
+
+one to many (one County maps to many User / many users many be in one County)
+
+
+
+0 - create entity County (the many in the relationship)
+
+php bin/console generate:doctrine:entity --no-interaction --entity=AppBundle:County --fields="name:string(255)"
+
+
+1 - create the Entity User (the one in the relationship)
+
+create with basic properties (not with foreign key) e.g. from CLI
+
+php bin/console generate:doctrine:entity --no-interaction --entity=AppBundle:User --fields="username:string(255) password:string(255)"
+
+
+2 - manually add foreign key
+
+    /**
+     * @var County
+     *
+     * @ORM\ManyToOne(targetEntity="County")
+     * @ORM\JoinColumn(name="county_id", referencedColumnName="id")
+     */
+    private $county;
+
+3 - make Symfony generate getters and setters and complete the entity creation
+
+php bin/console doctrine:generate:entities AppBundle
+
+4 - create / update DB schema
+
+ php bin/console  doctrine:database:create
+
+ php bin/console doctrine:schema:update --force
+
+
+5 - generate the crud
+
+ php bin/console generate:doctrine:crud --entity=AppBundle:User --format=annotation --with-write --no-interaction
+
+
+6 - make the form product a choice list from the entity
+
+in Form  AppBundle\Form\UserType:
+
+      $builder->add('county', EntityType::class, [
+            // query choices from this entity
+            'class' => 'AppBundle:County',
+
+            // use the User.username property as the visible option string
+            'choice_label' => 'name',
+        ]);
+
+7 - add a new column in INDEX form to list the county name
+
+                <td>{{ user.county.name }}</td>
