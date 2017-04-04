@@ -1,0 +1,20 @@
+(0) create DB
+
+php bin/console doctrine:database:create
+
+(1) create entity
+
+php bin/console generate:doctrine:entity --no-interaction --entity=AppBundle:Product --fields="title:string(255) price:float"
+
+php bin/console generate:doctrine:entity --no-interaction --entity=AppBundle:User --fields="username:string(255) password:string(255)"
+
+
+(2) update DB schema
+
+php bin/console doctrine:schema:update --force
+
+(3) create CRUD
+
+php bin/console generate:doctrine:crud --entity=AppBundle:Product --format=annotation --with-write --no-interaction
+
+php bin/console generate:doctrine:crud --entity=AppBundle:User --format=annotation --with-write --no-interaction

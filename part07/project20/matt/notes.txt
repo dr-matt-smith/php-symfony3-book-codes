@@ -1,0 +1,17 @@
+(1)
+copy project 19
+- so basic security working
+
+(2)
+create a blog entity and Crud
+
+(3)
+new blog entry for currentl logged in user
+
+===
+
+create Blog Entity
+
+php bin/console generate:doctrine:entity --no-interaction --entity=AppBundle:Blog --fields="content:string(255) title:string(255) author:Symfony\Component\Security\Core\User\User"
+
+php bin/console doctrine:schema:update --force
