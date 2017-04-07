@@ -1,0 +1,8 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_path: ../var/data/data.sqlite
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 446d4546578ddc55a8b22e03ae898d1285701959
